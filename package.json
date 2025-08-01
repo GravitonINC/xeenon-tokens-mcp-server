@@ -11,7 +11,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc -build && node scripts/build-cli.js",
-    "dev": "tsx watch scripts/start-server.ts"
+    "dev": "tsx watch scripts/start-server.ts",
+    "inspect": "tsc -build && node scripts/build-cli.js && npx @modelcontextprotocol/inspector node bin/cli.mjs "
   },
   "bin": {
     "xeenon-tokens-mcp-server": "bin/cli.mjs"
@@ -19,6 +20,7 @@
   "dependencies": {
     "@graviton-inc/xeenon-tokens-program-idl": "^0.0.1",
     "@modelcontextprotocol/sdk": "^1.17.1",
+    "neverthrow": "^8.2.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {

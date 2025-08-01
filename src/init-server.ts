@@ -1,5 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { z } from 'zod';
+import { registerTools } from './tools';
 
 export async function initServer() {
   const server = new McpServer({
@@ -7,17 +7,5 @@ export async function initServer() {
     version: '0.0.1',
   });
 
-  server.registerTool(
-    'echo',
-    {
-      title: 'Echo Tool',
-      description: 'Echoes back the provided message',
-      inputSchema: { message: z.string() },
-    },
-    async ({ message }) => ({
-      content: [{ type: 'text', text: `Tool echo: ${message}` }],
-    })
-  );
-
-  return server;
+  return registerTools(server);
 }

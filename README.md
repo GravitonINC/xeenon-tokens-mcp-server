@@ -25,7 +25,8 @@ Add the following to your `.cursor/mcp.json` or `claude_desktop_config.json` (Ma
       "args": ["-y", "@graviton-inc/xeenon-tokens-mcp-server@latest"],
       "env": {
         "RPC_URL": "https://api.mainnet-beta.solana.com",
-        "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]"
+        "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]",
+        "XEENON_API_KEY": "xeen_abcdef"
       }
     }
   }
@@ -45,7 +46,8 @@ Add the following to your `settings.json`
         "args": ["-y", "@graviton-inc/xeenon-tokens-mcp-server@latest"],
         "env": {
           "RPC_URL": "https://api.mainnet-beta.solana.com",
-          "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]"
+          "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]",
+          "XEENON_API_KEY": "xeen_abcdef"
         }
       },
       "settings": {}
@@ -77,7 +79,8 @@ Add the following to your `.cursor/mcp.json` or `claude_desktop_config.json`:
       ],
       "env": {
         "RPC_URL": "https://api.mainnet-beta.solana.com",
-        "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]"
+        "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]",
+        "XEENON_API_KEY": "xeen_abcdef"
       }
     }
   }
@@ -111,6 +114,7 @@ Then, add the following to your `.cursor/mcp.json` or `claude_desktop_config.jso
         "-e",
         "RPC_URL=https://api.mainnet-beta.solana.com",
         "WALLET_KEYPAIR=[1,2,3,4,5,6,7,8,9,10]",
+        "XEENON_API_KEY=xeen_abcdef",
         "gravitonxyz/xeenon-tokens-mcp-server"
       ]
     }
