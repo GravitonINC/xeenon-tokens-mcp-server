@@ -1,4 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { registerTools } from './tools';
 
 export async function initServer() {
   const server = new McpServer({
@@ -6,5 +7,5 @@ export async function initServer() {
     version: '0.0.1',
   });
 
-  return server;
+  return registerTools(server);
 }

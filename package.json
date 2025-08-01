@@ -11,22 +11,23 @@
   "type": "module",
   "scripts": {
     "build": "tsc -build && node scripts/build-cli.js",
-    "dev": "tsx watch scripts/start-server.ts"
+    "dev": "tsx watch scripts/start-server.ts",
+    "inspect": "tsc -build && node scripts/build-cli.js && npx @modelcontextprotocol/inspector node bin/cli.mjs "
   },
   "bin": {
     "xeenon-tokens-mcp-server": "bin/cli.mjs"
   },
   "dependencies": {
+    "@graviton-inc/xeenon-tokens-program-idl": "^0.0.1",
     "@modelcontextprotocol/sdk": "^1.17.1",
-    "zod": "3.24.1"
+    "neverthrow": "^8.2.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^20.17.16",
-    "@vitest/coverage-v8": "3.1.1",
     "esbuild": "^0.25.2",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2",
-    "vitest": "^3.1.1"
+    "typescript": "^5.8.2"
   },
   "description": "Official MCP server for Xeenon Tokens Program",
   "main": "index.js",
@@ -38,5 +39,6 @@
   "bugs": {
     "url": "https://github.com/GravitonINC/xeenon-tokens-mcp-server/issues"
   },
-  "homepage": "https://github.com/GravitonINC/xeenon-tokens-mcp-server#readme"
+  "homepage": "https://github.com/GravitonINC/xeenon-tokens-mcp-server#readme",
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
