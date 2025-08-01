@@ -1,0 +1,33 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => {
+      const env = { RPC_URL: config.rpcUrl, WALLET_KEYPAIR: config.walletKeypair };
+      if (config.xeenonApiUrl) env.XEENON_API_URL = config.xeenonApiUrl;
+      return { command: 'xeenon-tokens-mcp-server', args: [], env };
+    }
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - walletKeypair
+      - rpcUrl
+    properties:
+      walletKeypair:
+        type: string
+        default: '[]'
+        description: Wallet keypair
+      rpcUrl:
+        type: string
+        description: RPC URL
+      xeenonApiUrl:
+        type: string
+        description: Xeenon API URL
+        default: https://main.api.xeenon.com
+  exampleConfig:
+    walletKeypair: '[1,2,3,4,5,6,7,8,9,10]'
+    rpcUrl: https://api.mainnet-beta.solana.com

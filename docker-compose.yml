@@ -1,0 +1,6 @@
+services:
+  xeenon-tokens-mcp-server:
+    build: .
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
