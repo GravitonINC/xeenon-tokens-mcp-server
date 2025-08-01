@@ -157,7 +157,7 @@ npm publish --access public
 ```
 
 
-<!-- Supported operations -->
+## Supported tools
 
 | Operation | Implemented | Description | Requirements |
 |-----------|-------------|-------------|--------------|
