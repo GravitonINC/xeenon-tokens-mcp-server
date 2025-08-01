@@ -155,3 +155,22 @@ Publish
 ```
 npm publish --access public
 ```
+
+
+<!-- Supported operations -->
+
+| Operation | Implemented | Description | Requirements |
+|-----------|-------------|-------------|--------------|
+| accrue_position_rewards | ❌ | Accrue rewards for a staking position | Private key, RPC, Balance |
+| quote_buy_with_exact_cash_in | ❌ | Get quote for buying tokens with exact cash amount | Private key, RPC |
+| buy_with_exact_cash_in | ❌ | Buy tokens with exact cash amount | Private key, RPC, Balance |
+| quote_sell_with_exact_token_in | ❌ | Get quote for selling tokens with exact token amount | Private key, RPC |
+| sell_with_exact_token_in | ❌ | Sell tokens with exact token amount | Private key, RPC, Balance |
+| claim_creator_rewards | ❌ | Claim rewards as a token creator | Private key, RPC |
+| claim_staker_rewards | ❌ | Claim rewards as a token staker | Private key, RPC |
+| init_xeenon_position | ❌ | Initialize a new Xeenon position | Private key, RPC, Balance |
+| deposit_token | ❌ | Deposit tokens into a position | Private key, RPC, Balance |
+| withdraw_token | ❌ | Withdraw tokens from a position | Private key, RPC, Balance |
+| borrow | ❌ | Borrow against deposited tokens | Private key, RPC, Balance |
+| repay | ❌ | Repay borrowed amount | Private key, RPC, Balance |
+| donate_liquidity | ❌ | Donate tokens to liquidity pool | Private key, RPC, Balance |
