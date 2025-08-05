@@ -12,10 +12,11 @@ const getTokenDetailsParamsSchema = z.object({
 
 export const registerGetTokenDetailsByAddress = (server: McpServer) => {
   server.registerTool(
-    'getTokenDetailsByAddress',
+    'getTokenDetailsByAddressOrSymbol',
     {
       title: 'Get Token Details',
-      description: 'Get details for a Xeenon token',
+      description:
+        'Get details for a Xeenon token. The priority to get the token details is to use the 1. token address, 2. token symbol, 3. `$` + token symbol, 4. Token creator address or short name',
       inputSchema: getTokenDetailsParamsSchema.shape,
       outputSchema: tokenSchema.shape,
     },

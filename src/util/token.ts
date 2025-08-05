@@ -35,6 +35,12 @@ export const tokenSchema = z.object({
       xeenonMarketGroup: z.string(),
     })
     .describe('The Xeenon and Mayflower market addresses'),
+  message: z
+    .string()
+    .optional()
+    .describe(
+      'The method used to get the token details (by address, by symbol, or by owner)'
+    ),
 });
 
 export const getToken = async (tokenAddress: string) => {

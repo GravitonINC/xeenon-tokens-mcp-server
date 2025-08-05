@@ -182,8 +182,8 @@ Here are some example operations you can perform with the MCP server:
 ### 1. Get Token Details
 ```typescript
 // Get information about a Xeenon token
-getTokenDetailsByAddress({
-  tokenAddress: "UPh8qUNj3p5NSN4fTdHX1kubBSQph4PwxBZdV44XEEN"
+getTokenDetailsByAddressOrSymbol({
+  tokenAddressOrSymbol: "UPh8qUNj3p5NSN4fTdHX1kubBSQph4PwxBZdV44XEEN"
 })
 ```
 
@@ -293,7 +293,7 @@ npm publish --access public
 
 | Operation | Implemented | Description | Requirements |
 |-----------|-------------|-------------|--------------|
-| getTokenDetailsByAddress | ✅ | Get details for a Xeenon token by address | API Key |
+| getTokenDetailsByAddressOrSymbol | ✅ | Get details for a Xeenon token by address or symbol | API Key |
 | quoteBuy | ✅ | Get quote for buying tokens with exact cash amount | API Key, RPC |
 | buy | ✅ | Buy tokens with exact cash amount | API Key, Private key, RPC, CREDIEZ Balance |
 | quoteSell | ✅ | Get quote for selling tokens with exact token amount | API Key, RPC |
