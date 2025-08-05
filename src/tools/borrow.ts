@@ -11,7 +11,7 @@ const borrowParamsSchema = z.object({
   token: z
     .string()
     .describe(
-      'The address of the token to borrow the CREDIEZ against. Must be a token launched on Xeenon.'
+      'The address or symbol of the token to borrow the CREDIEZ against. Must be a token launched on Xeenon.'
     ),
 });
 

@@ -12,7 +12,7 @@ const donateLiquidityParamsSchema = z.object({
   token: z
     .string()
     .describe(
-      'The address of the token to donate to donate liquidity to. Must be a token launched on Xeenon.'
+      'The address or symbol of the token to donate to donate liquidity to. Must be a token launched on Xeenon.'
     ),
   amount: z
     .number()

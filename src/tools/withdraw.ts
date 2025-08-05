@@ -11,7 +11,7 @@ const withdrawParamsSchema = z.object({
   token: z
     .string()
     .describe(
-      'The address of the token to withdraw the tokens from. Must be a token launched on Xeenon.'
+      'The address or symbol of the token to withdraw the tokens from. Must be a token launched on Xeenon.'
     ),
 });
 

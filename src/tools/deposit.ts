@@ -11,7 +11,7 @@ const depositParamsSchema = z.object({
   token: z
     .string()
     .describe(
-      'The address of the token to stake the tokens into. Must be a token launched on Xeenon.'
+      'The address or symbol of the token to stake the tokens into. Must be a token launched on Xeenon.'
     ),
 });
 
