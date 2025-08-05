@@ -15,6 +15,12 @@ const schema = z.object({
   MAYFLOWER_PROGRAM_ID: z
     .string()
     .default('MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk'),
+  XEENON_PROGRAM_ID: z
+    .string()
+    .default('XEENqbVXt8y94cH7WMwYyQSuDgkvzZTzEzpsWLZu7Jf'),
+  TENANT_ADDRESS: z
+    .string()
+    .default('655W5GfTcnAtUkietVLonp89xtCFPfWx6GzFTcXTfp4r'),
 });
 
 export const ENV = schema.parse(process.env);
