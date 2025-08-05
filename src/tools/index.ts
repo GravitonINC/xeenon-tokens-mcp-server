@@ -7,6 +7,7 @@ import { registerBuy } from './buy';
 import { registerSell } from './sell';
 import { registerDeposit } from './deposit';
 import { registerWithdraw } from './withdraw';
+import { registerBorrow } from './borrow';
 
 export const registerTools = (server: McpServer) => {
   registerGetTokenDetailsByAddress(server);
@@ -17,5 +18,6 @@ export const registerTools = (server: McpServer) => {
   registerSell(server);
   registerDeposit(server);
   registerWithdraw(server);
+  registerBorrow(server);
   return server;
 };

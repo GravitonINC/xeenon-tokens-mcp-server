@@ -4,7 +4,10 @@ import { getTokenPdas, TokenPdas } from './token-pdas';
 import { loadKeypairFromEnv } from './wallet';
 import { getXeenonProgram, XeenonPositionAccount } from './xeenon-program';
 import BN from 'bn.js';
-import { getAssociatedTokenAddressSync } from '@solana/spl-token';
+import {
+  getAssociatedTokenAddressSync,
+  TOKEN_PROGRAM_ID,
+} from '@solana/spl-token';
 import { createATAInstruction } from './token-account';
 
 export class XeenonPosition {
@@ -51,6 +54,8 @@ export class XeenonPosition {
    * @returns The instructions to withdraw tokens from the position.
    */
   async withdrawTokensInstruction(tokensAmount: BN) {
+    const position = await this.loadPosition();
+    if (!position) throw new Error('Position not found');
     const { ata: payerTokenAccount, ix: payerTokenAccountIx } =
       await createATAInstruction(this.pdas.mintToken, this.payer.publicKey);
     const depositIx = await this.xeenonProgram.methods
@@ -69,8 +74,42 @@ export class XeenonPosition {
         ...({ xeenonMarket: this.pdas.xeenonMarket } as any),
       })
       .instruction();
-    const otherIxs = await this.createOrUpdatePositionInstruction();
+    const otherIxs = await this.updatePositionInstruction(position);
     return [...otherIxs, payerTokenAccountIx, depositIx];
+  }
+
+  /**
+   * Creates the instructions to borrow CREDIEZ using the position as collateral.
+   * @param tokensAmount The amount of tokens to borrow.
+   * @returns The instructions to borrow CREDIEZ using the position as collateral.
+   */
+  async borrowInstruction(tokensAmount: BN) {
+    const { ata: payerTokenAccount, ix: payerTokenAccountIx } =
+      await createATAInstruction(this.pdas.mintMain, this.payer.publicKey);
+    const depositIx = await this.xeenonProgram.methods
+      .borrow(tokensAmount)
+      .accounts({
+        mayflowerMarket: this.pdas.mayflowerMarketAddress,
+        mayflowerMarketMeta: this.pdas.mayflowerMarketMeta,
+        xeenonPosition: this.pdas.xeenonPosition,
+        payer: this.payer.publicKey,
+        liqVaultMain: this.pdas.liqVaultMain,
+        mintMain: this.pdas.mintMain,
+        tokenProgramMain: TOKEN_PROGRAM_ID,
+        mayflowerPersonalPosition: this.pdas.mayflowerPosition,
+        payerTokenAccount,
+        mayflowerMarketGroup: this.pdas.mayflowerMarketGroup,
+        mayflowerTenant: this.pdas.tenant,
+        revEscrowGroup: this.pdas.revEscrowGroup,
+        revEscrowTenant: this.pdas.revEscrowTenant,
+        // Xeenon market is supposed to be inferred, but it fails to do so the first time because the position is not created yet
+        ...({
+          xeenonMarket: this.pdas.xeenonMarket,
+        } as any),
+      })
+      .instruction();
+
+    return [payerTokenAccountIx, depositIx];
   }
 
   async createOrUpdatePositionInstruction() {

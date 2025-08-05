@@ -176,6 +176,6 @@ npm publish --access public
 | claim_staker_rewards | ❌ | Claim rewards as a token staker | Private key, RPC |
 | deposit | ✅ | Deposit tokens into a position | Private key, RPC, Token Balance |
 | withdraw | ✅ | Withdraw tokens from a position | Private key, RPC, Position Balance |
-| borrow | ❌ | Borrow against deposited tokens | Private key, RPC, Balance |
+| borrow | ✅ | Borrow CREDIEZ against deposited tokens | Private key, RPC, Position Balance |
 | repay | ❌ | Repay borrowed amount | Private key, RPC, Balance |
 | donateLiquidity | ✅ | Donate tokens to liquidity pool | Private key, RPC, CREDIEZBalance |
