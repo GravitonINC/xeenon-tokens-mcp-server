@@ -6,7 +6,7 @@ startCommand:
     # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
     |-
     (config) => {
-      const env = { XEENON_API_KEY: config.xeenonApiKey, RPC_URL: config.rpcUrl, WALLET_KEYPAIR: config.walletKeypair };
+      const env = { XEENON_API_KEY: config.xeenonApiKey, RPC_URL: config.rpcUrl, WALLET_KEYPAIR: config.walletKeypair, CREDIEZ_ADDRESS: config.crediezAddress, MAYFLOWER_PROGRAM_ID: config.mayflowerProgramId, XEENON_PROGRAM_ID: config.xeenonProgramId, TENANT_ADDRESS: config.tenantAddress, SOLANA_PRIVATE_KEY: config.solanaPrivateKey };
       if (config.xeenonApiUrl) env.XEENON_API_URL = config.xeenonApiUrl;
       return { command: 'xeenon-tokens-mcp-server', args: [], env };
     }
@@ -33,6 +33,43 @@ startCommand:
         type: string
         description: Xeenon API key
         default: xeen_abcdef
+      crediezAddress:
+        type: string
+        description: CREDIEZ address
+        default: ViSmGbBJNTSMczzEqPU2ijmAqpstphkBuM9SoYCredz
+      mayflowerProgramId:
+        type: string
+        description: Mayflower program ID
+        default: MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk
+      xeenonProgramId:
+        type: string
+        description: Xeenon program ID
+        default: XEENqbVXt8y94cH7WMwYyQSuDgkvzZTzEzpsWLZu7Jf
+      tenantAddress:
+        type: string
+        description: Mayflower tenant address
+        default: 655W5GfTcnAtUkietVLonp89xtCFPfWx6GzFTcXTfp4r
+      solanaPrivateKey:
+        type: string
+        description: Solana private key
+        default: []
+  # XEENON_API_KEY: z.string().default('xeen_'),
+  # SOLANA_PRIVATE_KEY: z.string().default('[]'),
+  # RPC_URL: z.string().default('https://api.mainnet-beta.solana.com'),
+  # XEENON_API_URL: z.string().default('https://main.public-api.xeenon.xyz'),
+  # CREDIEZ_ADDRESS: z
+  #   .string()
+  #   .default('ViSmGbBJNTSMczzEqPU2ijmAqpstphkBuM9SoYCredz'),
+  # MAYFLOWER_PROGRAM_ID: z
+  #   .string()
+  #   .default('MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk'),
+  # XEENON_PROGRAM_ID: z
+  #   .string()
+  #   .default('XEENqbVXt8y94cH7WMwYyQSuDgkvzZTzEzpsWLZu7Jf'),
+  # TENANT_ADDRESS: z
+  #   .string()
+  #   .default('655W5GfTcnAtUkietVLonp89xtCFPfWx6GzFTcXTfp4r'),
   exampleConfig:
     walletKeypair: '[1,2,3,4,5,6,7,8,9,10]'
     rpcUrl: https://api.mainnet-beta.solana.com
+    xeenonApiKey: xeen_abcdef
