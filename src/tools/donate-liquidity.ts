@@ -1,9 +1,7 @@
 import { z } from 'zod';
 import { loadKeypairFromEnv } from '../util/wallet';
-import { getConnection } from '../util/connection';
-import { getToken } from '../util/token';
+import { tokenAddressToMarketLinearWithMetaSdk } from '../util/token';
 import { PublicKey, Transaction } from '@solana/web3.js';
-import { MarketLinearWithMetaSdk } from '@mayflower-fi/may-sdk/build/marketLinearWithMeta';
 import { uiToBigInt } from '../util/big-int';
 import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { sendAndConfirmTransactionWithPriorityFee } from '../util/tx';
@@ -28,18 +26,8 @@ export const donateLiquidity = async ({
   token,
 }: z.infer<typeof donateLiquidityParamsSchema>) => {
   const wallet = loadKeypairFromEnv();
-  const connection = getConnection();
-  const tokenInfoRes = await getToken(token);
-  if (tokenInfoRes.isErr()) throw new Error(tokenInfoRes.error);
-  const tokenInfo = tokenInfoRes.value;
-  const sdk = await MarketLinearWithMetaSdk.loadFromRpc({
-    connection,
-    programId: new PublicKey(ENV.MAYFLOWER_PROGRAM_ID),
-    marketGroupAddress: new PublicKey(tokenInfo.market.mayflowerMarketGroup),
-    marketMetaAddress: new PublicKey(
-      tokenInfo.market.mayflowerMarketMetaAddress
-    ),
-  });
+  const sdk = await tokenAddressToMarketLinearWithMetaSdk(token);
+
   const tokenSrc = getAssociatedTokenAddressSync(
     new PublicKey(ENV.CREDIEZ_ADDRESS),
     wallet.publicKey
