@@ -8,6 +8,7 @@ import { uiToBigInt } from '../util/big-int';
 import { getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { sendAndConfirmTransactionWithPriorityFee } from '../util/tx';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { ENV } from '../util';
 
 const donateLiquidityParamsSchema = z.object({
   token: z
@@ -22,7 +23,7 @@ const donateLiquidityParamsSchema = z.object({
     ),
 });
 
-const donateLiquidity = async ({
+export const donateLiquidity = async ({
   amount,
   token,
 }: z.infer<typeof donateLiquidityParamsSchema>) => {
@@ -33,14 +34,14 @@ const donateLiquidity = async ({
   const tokenInfo = tokenInfoRes.value;
   const sdk = await MarketLinearWithMetaSdk.loadFromRpc({
     connection,
-    programId: new PublicKey('zxc'),
+    programId: new PublicKey(ENV.MAYFLOWER_PROGRAM_ID),
     marketGroupAddress: new PublicKey(tokenInfo.market.mayflowerMarketGroup),
     marketMetaAddress: new PublicKey(
       tokenInfo.market.mayflowerMarketMetaAddress
     ),
   });
   const tokenSrc = getAssociatedTokenAddressSync(
-    new PublicKey(tokenInfo.address),
+    new PublicKey(ENV.CREDIEZ_ADDRESS),
     wallet.publicKey
   );
 
@@ -67,6 +68,7 @@ export const registerDonateLiquidity = (server: McpServer) => {
       }).shape,
     },
     async (args) => {
+      const connection = getConnection();
       try {
         const txSignature = await donateLiquidity(args);
         const structuredContent = { txSignature };
