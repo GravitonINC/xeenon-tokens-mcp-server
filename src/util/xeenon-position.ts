@@ -5,6 +5,7 @@ import { loadKeypairFromEnv } from './wallet';
 import { getXeenonProgram, XeenonPositionAccount } from './xeenon-program';
 import BN from 'bn.js';
 import { getAssociatedTokenAddressSync } from '@solana/spl-token';
+import { createATAInstruction } from './token-account';
 
 export class XeenonPosition {
   readonly payer = loadKeypairFromEnv();
@@ -42,6 +43,34 @@ export class XeenonPosition {
       .instruction();
     const otherIxs = await this.createOrUpdatePositionInstruction();
     return [...otherIxs, depositIx];
+  }
+
+  /**
+   * Creates the instructions to withdraw tokens from the position, including the instructions to update the position.
+   * @param tokensAmount The amount of tokens to withdraw.
+   * @returns The instructions to withdraw tokens from the position.
+   */
+  async withdrawTokensInstruction(tokensAmount: BN) {
+    const { ata: payerTokenAccount, ix: payerTokenAccountIx } =
+      await createATAInstruction(this.pdas.mintToken, this.payer.publicKey);
+    const depositIx = await this.xeenonProgram.methods
+      .withdrawToken(tokensAmount)
+      .accounts({
+        escrow: this.pdas.escrow,
+        mayflowerMarket: this.pdas.mayflowerMarketAddress,
+        mayflowerMarketMeta: this.pdas.mayflowerMarketMeta,
+        mayflowerPersonalPosition: this.pdas.mayflowerPosition,
+        mintToken: this.pdas.mintToken,
+        xeenonPosition: this.pdas.xeenonPosition,
+        payer: this.payer.publicKey,
+        xeenonMarketGroup: this.pdas.xeenonMarketGroup,
+        payerTokenAccount,
+        // Xeenon marked is supposed to be inferred, but it fails to do so the first time because the position is not created yet
+        ...({ xeenonMarket: this.pdas.xeenonMarket } as any),
+      })
+      .instruction();
+    const otherIxs = await this.createOrUpdatePositionInstruction();
+    return [...otherIxs, payerTokenAccountIx, depositIx];
   }
 
   async createOrUpdatePositionInstruction() {

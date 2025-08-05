@@ -6,25 +6,25 @@ import { Transaction } from '@solana/web3.js';
 import { sendAndConfirmTransactionWithPriorityFee } from '../util/tx';
 import { XeenonPosition } from '../util/xeenon-position';
 
-const depositParamsSchema = z.object({
-  tokensAmount: z.number().describe('The amount of tokens to deposit'),
+const withdrawParamsSchema = z.object({
+  tokensAmount: z.number().describe('The amount of tokens to withdraw'),
   token: z
     .string()
     .describe(
-      'The address of the token to stake the tokens into. Must be a token launched on Xeenon.'
+      'The address of the token to withdraw the tokens from. Must be a token launched on Xeenon.'
     ),
 });
 
-export const deposit = async ({
+export const withdraw = async ({
   tokensAmount,
   token,
-}: z.infer<typeof depositParamsSchema>) => {
+}: z.infer<typeof withdrawParamsSchema>) => {
   const tokenInfoRes = await getToken(token);
   if (tokenInfoRes.isErr()) throw new Error(tokenInfoRes.error);
   const tokenInfo = tokenInfoRes.value;
 
   const xeenonPosition = new XeenonPosition(tokenInfo);
-  const ixs = await xeenonPosition.depositTokensInstruction(
+  const ixs = await xeenonPosition.withdrawTokensInstruction(
     uiToBN(tokensAmount)
   );
 
@@ -33,13 +33,13 @@ export const deposit = async ({
   return signature;
 };
 
-export const registerDeposit = (server: McpServer) => {
+export const registerWithdraw = (server: McpServer) => {
   server.registerTool(
-    'deposit',
+    'withdraw',
     {
-      title: 'Deposit tokens into a position',
-      description: 'Deposit/Stake tokens into a position',
-      inputSchema: depositParamsSchema.shape,
+      title: 'Withdraw tokens from a position',
+      description: 'Withdraw/Unstake tokens from a position',
+      inputSchema: withdrawParamsSchema.shape,
       outputSchema: z.object({
         txSignature: z.string().describe('The signature of the transaction'),
         txStatus: z.string().describe('The status of the transaction'),
@@ -47,7 +47,7 @@ export const registerDeposit = (server: McpServer) => {
     },
     async (args) => {
       try {
-        const signature = await deposit(args);
+        const signature = await withdraw(args);
         const structuredContent = {
           txSignature: signature,
           txStatus: `Transaction sent but not confirmed, visit https://solscan.io/tx/${signature} to see the current status`,
