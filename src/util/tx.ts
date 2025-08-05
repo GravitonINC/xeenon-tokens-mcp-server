@@ -71,13 +71,10 @@ const getPriorityFeeEstimate = async (tx: Transaction) => {
       }),
       headers: { 'Content-Type': 'application/json' },
     });
-    if (!res.ok) {
-      throw new Error(`Failed to get priority fee estimate: ${res.statusText}`);
-    }
+    if (!res.ok) return null;
     const data = (await res.json()) as GetPriorityFeeEstimateResponse;
     return data.result;
   } catch (error) {
-    console.error('Failed to get priority fee estimate:', error);
     return null;
   }
 };
@@ -90,7 +87,6 @@ export const addPriorityFee = async (
 
   // Add null check for feeEstimate
   if (!feeEstimate || !feeEstimate.priorityFeeLevels) {
-    console.warn('Failed to get priority fee estimate, using default values');
     const defaultFee = 1000; // Default to 1000 microLamports
     const computePriceIx = ComputeBudgetProgram.setComputeUnitPrice({
       microLamports: defaultFee,
