@@ -172,8 +172,6 @@ npm publish --access public
 | buy | ✅ | Buy tokens with exact cash amount | Private key, RPC, CREDIEZ Balance |
 | quoteSell | ✅ | Get quote for selling tokens with exact token amount | RPC |
 | sell | ✅ | Sell tokens with exact token amount | Private key, RPC, Token Balance |
-| claim_creator_rewards | ❌ | Claim rewards as a token creator | Private key, RPC |
-| claim_staker_rewards | ❌ | Claim rewards as a token staker | Private key, RPC |
 | deposit | ✅ | Deposit tokens into a position | Private key, RPC, Token Balance |
 | withdraw | ✅ | Withdraw tokens from a position | Private key, RPC, Position Balance |
 | borrow | ✅ | Borrow CREDIEZ against deposited tokens | Private key, RPC, Position Balance |
