@@ -80,14 +80,14 @@ export class XeenonPosition {
 
   /**
    * Creates the instructions to borrow CREDIEZ using the position as collateral.
-   * @param tokensAmount The amount of tokens to borrow.
+   * @param borrowAmount The amount of CREDIEZ to borrow.
    * @returns The instructions to borrow CREDIEZ using the position as collateral.
    */
-  async borrowInstruction(tokensAmount: BN) {
+  async borrowInstruction(borrowAmount: BN) {
     const { ata: payerTokenAccount, ix: payerTokenAccountIx } =
       await createATAInstruction(this.pdas.mintMain, this.payer.publicKey);
     const depositIx = await this.xeenonProgram.methods
-      .borrow(tokensAmount)
+      .borrow(borrowAmount)
       .accounts({
         mayflowerMarket: this.pdas.mayflowerMarketAddress,
         mayflowerMarketMeta: this.pdas.mayflowerMarketMeta,
@@ -102,6 +102,36 @@ export class XeenonPosition {
         mayflowerTenant: this.pdas.tenant,
         revEscrowGroup: this.pdas.revEscrowGroup,
         revEscrowTenant: this.pdas.revEscrowTenant,
+        // Xeenon market is supposed to be inferred, but it fails to do so the first time because the position is not created yet
+        ...({
+          xeenonMarket: this.pdas.xeenonMarket,
+        } as any),
+      })
+      .instruction();
+
+    return [payerTokenAccountIx, depositIx];
+  }
+
+  /**
+   * Creates the instructions to repay a CREDIEZ loan.
+   * @param repayAmount The amount of CREDIEZ to repay.
+   * @returns The instructions to repay a CREDIEZ loan.
+   */
+  async repayInstruction(repayAmount: BN) {
+    const { ata: payerTokenAccount, ix: payerTokenAccountIx } =
+      await createATAInstruction(this.pdas.mintMain, this.payer.publicKey);
+    const depositIx = await this.xeenonProgram.methods
+      .repay(repayAmount)
+      .accounts({
+        mayflowerMarket: this.pdas.mayflowerMarketAddress,
+        mayflowerMarketMeta: this.pdas.mayflowerMarketMeta,
+        xeenonPosition: this.pdas.xeenonPosition,
+        payer: this.payer.publicKey,
+        liqVaultMain: this.pdas.liqVaultMain,
+        mintMain: this.pdas.mintMain,
+        tokenProgramMain: TOKEN_PROGRAM_ID,
+        mayflowerPersonalPosition: this.pdas.mayflowerPosition,
+        payerTokenAccount,
         // Xeenon market is supposed to be inferred, but it fails to do so the first time because the position is not created yet
         ...({
           xeenonMarket: this.pdas.xeenonMarket,
