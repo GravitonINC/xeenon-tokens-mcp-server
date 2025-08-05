@@ -19,9 +19,9 @@ The following environment variables are required for the MCP server to function 
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `XEENON_API_KEY` | ✅ | `xeen_` | Your Xeenon API key for accessing token data |
+| `XEENON_API_KEY` | ✅ | `xeen_` | Your Xeenon API key for accessing token data. Go to [https://xeenon.xyz](https://xeenon.xyz) to get one. |
 | `SOLANA_PRIVATE_KEY` | ✅ | `[]` | Your Solana wallet private key for signing transactions |
-| `RPC_URL` | ❌ | `https://api.mainnet-beta.solana.com` | Solana RPC endpoint URL |
+| `RPC_URL` | ✅ | `https://api.mainnet-beta.solana.com` | Solana RPC endpoint URL |
 | `XEENON_API_URL` | ❌ | `https://main.public-api.xeenon.xyz` | Xeenon API base URL |
 | `CREDIEZ_ADDRESS` | ❌ | `ViSmGbBJNTSMczzEqPU2ijmAqpstphkBuM9SoYCredz` | CREDIEZ token mint address |
 | `MAYFLOWER_PROGRAM_ID` | ❌ | `MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk` | Mayflower program ID |
