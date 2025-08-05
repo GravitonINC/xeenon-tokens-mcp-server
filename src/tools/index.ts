@@ -5,6 +5,7 @@ import { registerQuoteBuy } from './quote-buy';
 import { registerQuoteSell } from './quote-sell';
 import { registerBuy } from './buy';
 import { registerSell } from './sell';
+import { registerDeposit } from './deposit';
 
 export const registerTools = (server: McpServer) => {
   registerGetTokenDetailsByAddress(server);
@@ -13,5 +14,6 @@ export const registerTools = (server: McpServer) => {
   registerQuoteSell(server);
   registerBuy(server);
   registerSell(server);
+  registerDeposit(server);
   return server;
 };

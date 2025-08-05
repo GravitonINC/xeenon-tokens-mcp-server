@@ -5,6 +5,8 @@ import { ENV } from './env';
 import { loadKeypairFromEnv } from './wallet';
 import { XeenonPda } from './xeenon-pda';
 
+export type TokenPdas = ReturnType<typeof getTokenPdas>;
+
 export const getTokenPdas = (token: Token) => {
   const payer = loadKeypairFromEnv().publicKey;
   const mayflowerProgramId = new PublicKey(ENV.MAYFLOWER_PROGRAM_ID);
