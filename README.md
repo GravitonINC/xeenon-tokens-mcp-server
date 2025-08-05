@@ -168,7 +168,7 @@ npm publish --access public
 | accrue_position_rewards | ❌ | Accrue rewards for a staking position | Private key, RPC, Balance |
 | quote_buy_with_exact_cash_in | ✅ | Get quote for buying tokens with exact cash amount | RPC |
 | buy_with_exact_cash_in | ❌ | Buy tokens with exact cash amount | Private key, RPC, Balance |
-| quote_sell_with_exact_token_in | ❌ | Get quote for selling tokens with exact token amount | Private key, RPC |
+| quote_sell_with_exact_token_in | ✅ | Get quote for selling tokens with exact token amount | RPC |
 | sell_with_exact_token_in | ❌ | Sell tokens with exact token amount | Private key, RPC, Balance |
 | claim_creator_rewards | ❌ | Claim rewards as a token creator | Private key, RPC |
 | claim_staker_rewards | ❌ | Claim rewards as a token staker | Private key, RPC |
