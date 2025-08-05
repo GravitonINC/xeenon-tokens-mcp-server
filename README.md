@@ -177,4 +177,4 @@ npm publish --access public
 | withdraw_token | ❌ | Withdraw tokens from a position | Private key, RPC, Balance |
 | borrow | ❌ | Borrow against deposited tokens | Private key, RPC, Balance |
 | repay | ❌ | Repay borrowed amount | Private key, RPC, Balance |
-| donate_liquidity | ❌ | Donate tokens to liquidity pool | Private key, RPC, Balance |
+| donate_liquidity | ✅ | Donate tokens to liquidity pool | Private key, RPC, CREDIEZBalance |
