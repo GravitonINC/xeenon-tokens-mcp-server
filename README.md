@@ -25,7 +25,7 @@ Add the following to your `.cursor/mcp.json` or `claude_desktop_config.json` (Ma
       "args": ["-y", "@graviton-inc/xeenon-tokens-mcp-server@latest"],
       "env": {
         "RPC_URL": "https://api.mainnet-beta.solana.com",
-        "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]",
+        "SOLANA_PRIVATE_KEY": "[1,2,3,4,5,6,7,8,9,10]",
         "XEENON_API_KEY": "xeen_abcdef"
       }
     }
@@ -46,7 +46,7 @@ Add the following to your `settings.json`
         "args": ["-y", "@graviton-inc/xeenon-tokens-mcp-server@latest"],
         "env": {
           "RPC_URL": "https://api.mainnet-beta.solana.com",
-          "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]",
+          "SOLANA_PRIVATE_KEY": "[1,2,3,4,5,6,7,8,9,10]",
           "XEENON_API_KEY": "xeen_abcdef"
         }
       },
@@ -74,12 +74,12 @@ Add the following to your `.cursor/mcp.json` or `claude_desktop_config.json`:
         "--rm",
         "-i",
         "-e", "RPC_URL",
-        "-e", "WALLET_KEYPAIR",
+        "-e", "SOLANA_PRIVATE_KEY",
         "gravitonxyz/xeenon-tokens-mcp-server"
       ],
       "env": {
         "RPC_URL": "https://api.mainnet-beta.solana.com",
-        "WALLET_KEYPAIR": "[1,2,3,4,5,6,7,8,9,10]",
+        "SOLANA_PRIVATE_KEY": "[1,2,3,4,5,6,7,8,9,10]",
         "XEENON_API_KEY": "xeen_abcdef"
       }
     }
@@ -113,7 +113,7 @@ Then, add the following to your `.cursor/mcp.json` or `claude_desktop_config.jso
         "-i",
         "-e",
         "RPC_URL=https://api.mainnet-beta.solana.com",
-        "WALLET_KEYPAIR=[1,2,3,4,5,6,7,8,9,10]",
+        "SOLANA_PRIVATE_KEY=[1,2,3,4,5,6,7,8,9,10]",
         "XEENON_API_KEY=xeen_abcdef",
         "gravitonxyz/xeenon-tokens-mcp-server"
       ]
@@ -177,4 +177,4 @@ npm publish --access public
 | withdraw_token | ❌ | Withdraw tokens from a position | Private key, RPC, Balance |
 | borrow | ❌ | Borrow against deposited tokens | Private key, RPC, Balance |
 | repay | ❌ | Repay borrowed amount | Private key, RPC, Balance |
-| donate_liquidity | ❌ | Donate tokens to liquidity pool | Private key, RPC, Balance |
+| donate_liquidity | ✅ | Donate tokens to liquidity pool | Private key, RPC, CREDIEZBalance |
