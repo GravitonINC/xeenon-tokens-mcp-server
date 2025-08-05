@@ -19,7 +19,8 @@
     "xeenon-tokens-mcp-server": "bin/cli.mjs"
   },
   "dependencies": {
-    "@graviton-inc/xeenon-tokens-program-idl": "^0.0.1",
+    "@graviton-inc/xeenon-tokens-program-idl": "^0.0.2",
+    "@coral-xyz/anchor": "0.31.1",
     "@mayflower-fi/may-sdk": "^0.0.26",
     "@modelcontextprotocol/sdk": "^1.17.1",
     "@solana/spl-token": "^0.4.13",

@@ -5,6 +5,8 @@ import { PublicKey } from '@solana/web3.js';
 import { MarketLinearWithMetaSdk } from '@mayflower-fi/may-sdk/build/marketLinearWithMeta';
 import { getConnection } from './connection';
 
+export type Token = z.infer<typeof tokenSchema>;
+
 export const tokenSchema = z.object({
   name: z.string().describe('The name of the token'),
   symbol: z.string().describe('The symbol of the token'),
@@ -63,7 +65,7 @@ export const tokenAddressToMarketLinearWithMetaSdk = async (token: string) => {
   if (tokenInfoRes.isErr()) throw new Error(tokenInfoRes.error);
   const tokenInfo = tokenInfoRes.value;
   const sdk = await MarketLinearWithMetaSdk.loadFromRpc({
-    connection,
+    connection: connection as any,
     programId: new PublicKey(ENV.MAYFLOWER_PROGRAM_ID),
     marketGroupAddress: new PublicKey(tokenInfo.market.mayflowerMarketGroup),
     marketMetaAddress: new PublicKey(

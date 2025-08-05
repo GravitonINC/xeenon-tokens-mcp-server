@@ -27,7 +27,8 @@ Add the following to your `.cursor/mcp.json` or `claude_desktop_config.json` (Ma
         "RPC_URL": "https://api.mainnet-beta.solana.com",
         "SOLANA_PRIVATE_KEY": "[1,2,3,4,5,6,7,8,9,10]",
         "XEENON_API_KEY": "xeen_abcdef"
-      }
+      },
+      "toolCallTimeoutMillis": 120000
     }
   }
 }
@@ -81,7 +82,8 @@ Add the following to your `.cursor/mcp.json` or `claude_desktop_config.json`:
         "RPC_URL": "https://api.mainnet-beta.solana.com",
         "SOLANA_PRIVATE_KEY": "[1,2,3,4,5,6,7,8,9,10]",
         "XEENON_API_KEY": "xeen_abcdef"
-      }
+      },
+      "toolCallTimeoutMillis": 120000
     }
   }
 }
@@ -117,7 +119,8 @@ Then, add the following to your `.cursor/mcp.json` or `claude_desktop_config.jso
         "XEENON_API_KEY=xeen_abcdef",
         "gravitonxyz/xeenon-tokens-mcp-server"
       ]
-    }
+    },
+    "toolCallTimeoutMillis": 120000
   }
 }
 ```
@@ -167,7 +170,7 @@ npm publish --access public
 |-----------|-------------|-------------|--------------|
 | accrue_position_rewards | ❌ | Accrue rewards for a staking position | Private key, RPC, Balance |
 | quote_buy_with_exact_cash_in | ✅ | Get quote for buying tokens with exact cash amount | RPC |
-| buy_with_exact_cash_in | ❌ | Buy tokens with exact cash amount | Private key, RPC, Balance |
+| buy_with_exact_cash_in | ✅ | Buy tokens with exact cash amount | Private key, RPC, CREDIEZ Balance |
 | quote_sell_with_exact_token_in | ✅ | Get quote for selling tokens with exact token amount | RPC |
 | sell_with_exact_token_in | ❌ | Sell tokens with exact token amount | Private key, RPC, Balance |
 | claim_creator_rewards | ❌ | Claim rewards as a token creator | Private key, RPC |
