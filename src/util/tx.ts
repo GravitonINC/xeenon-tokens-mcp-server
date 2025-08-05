@@ -26,10 +26,12 @@ export const sendAndConfirmTransactionWithPriorityFee = async (
       await addPriorityFee(tx, priorityFee);
     }
   } catch (error) {}
-
-  return sendAndConfirmTransaction(connection, tx, [wallet], {
-    maxRetries: 3,
-  });
+  tx.sign(wallet);
+  const signature = await connection.sendRawTransaction(tx.serialize());
+  return signature;
+  // return sendAndConfirmTransaction(connection, tx, [wallet], {
+  //   maxRetries: 3,
+  // });
 };
 
 type GetPriorityFeeEstimateResponse = {

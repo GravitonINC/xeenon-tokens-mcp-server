@@ -65,12 +65,16 @@ export const registerDonateLiquidity = (server: McpServer) => {
       inputSchema: donateLiquidityParamsSchema.shape,
       outputSchema: z.object({
         txSignature: z.string().describe('The signature of the transaction'),
+        txStatus: z.string().describe('The status of the transaction'),
       }).shape,
     },
     async (args) => {
       try {
         const txSignature = await donateLiquidity(args);
-        const structuredContent = { txSignature };
+        const structuredContent = {
+          txSignature,
+          txStatus: `Transaction sent but not confirmed, visit https://solscan.io/tx/${txSignature} to see the current status`,
+        };
         return {
           content: [{ type: 'text', text: JSON.stringify(structuredContent) }],
           isError: false,
