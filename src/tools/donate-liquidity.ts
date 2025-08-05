@@ -68,7 +68,6 @@ export const registerDonateLiquidity = (server: McpServer) => {
       }).shape,
     },
     async (args) => {
-      const connection = getConnection();
       try {
         const txSignature = await donateLiquidity(args);
         const structuredContent = { txSignature };
