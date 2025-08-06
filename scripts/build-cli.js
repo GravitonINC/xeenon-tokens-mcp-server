@@ -15,7 +15,14 @@ async function build() {
     format: 'esm',
     outfile: 'bin/cli.mjs',
     banner: {
-      js: "#!/usr/bin/env node\nimport { createRequire } from 'module';const require = createRequire(import.meta.url);" // see https://github.com/evanw/esbuild/pull/2067
+      js: `#!/usr/bin/env node
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);`
     },
     external: ['util'],
   });
