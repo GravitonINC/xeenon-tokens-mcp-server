@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/gravitoninc-xeenon-tokens-mcp-server-badge.png)](https://mseep.ai/app/gravitoninc-xeenon-tokens-mcp-server)
+
 # Xeenon Tokens MCP Server
 
 
