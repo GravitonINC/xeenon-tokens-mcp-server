@@ -167,7 +167,7 @@ Then, add the following to your `.cursor/mcp.json` or `claude_desktop_config.jso
 
 #### Installing via Smithery
 
-[![smithery badge](https://smithery.ai/badge/@GravitonINC/xeenon-tokens-mcp-server)](https://smithery.ai/server/@GravitonINC/xeenon-tokens-mcp-server)
+[![LightNow capabilities](https://lightnow.ai/badge/io.github.GravitonINC/xeenon-tokens-mcp-server)](https://lightnow.ai/servers/io.github.GravitonINC/xeenon-tokens-mcp-server)
 
 To install Xeenon Tokens MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@GravitonINC/xeenon-tokens-mcp-server):
 
